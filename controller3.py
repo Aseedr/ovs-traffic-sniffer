@@ -113,7 +113,7 @@ class ExampleSwitch13(app_manager.RyuApp):
                         self.send_out(parser, datapath, ofproto, in_port, actions, msg)
 
             else:
-                actions = [parser.OFPActionOutput(1), parser.OFPActionOutput(5)]
+                actions = [parser.OFPActionOutput(1)]
                 match = parser.OFPMatch(ip_proto=0x06, eth_type=0x0800, tcp_dst=pkt_tcp[0].dst_port)
                 self.add_flow(datapath, 1, match, actions, 1, 10)
                 
@@ -121,7 +121,7 @@ class ExampleSwitch13(app_manager.RyuApp):
                     self.send_out(parser, datapath, ofproto, in_port, actions, msg)
 
                 for i, y in self.mac_to_port[dpid].items():
-                    actions = [parser.OFPActionOutput(y), parser.OFPActionOutput(5)]
+                    actions = [parser.OFPActionOutput(y)]
                     match = parser.OFPMatch(eth_dst=i, ip_proto=0x06, eth_type=0x0800, tcp_dst=pkt_tcp[0].dst_port)
                     self.add_flow(datapath, 3, match, actions, 0)
                     
